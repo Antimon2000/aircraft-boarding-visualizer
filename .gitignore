@@ -1,5 +1,5 @@
 .idea/
-MieZ.iml
+*.iml
 out/
 target/
 .DS_Store
