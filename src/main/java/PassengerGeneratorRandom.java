@@ -10,7 +10,7 @@ public class PassengerGeneratorRandom implements PassengerGenerator {
 
         for (int row = 1; row <= rows; row++) {
             for (int seat = 1; seat <= seatsPerRow; seat++) {
-                Passenger passenger = new Passenger(new Position(row, seat));
+                Passenger passenger = new Passenger(new Position(row, seat), 8);
                 passengers.add(passenger);
             }
         }

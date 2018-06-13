@@ -9,6 +9,7 @@ public class BoardingVisualizerGui extends JFrame implements Gui {
     private static final Color COLOR_FREE_SEAT = Color.darkGray.brighter().brighter();
     private static final Color COLOR_OCCUPIED = new Color(51, 151, 255);
     private static final Color COLOR_AISLE = Color.lightGray;
+    private static final Color COLOR_BAGGAGE = new Color(255, 153, 102);
 
     private static final int WIDTH  = 600;
     private static final int HEIGHT = 850;
@@ -43,7 +44,13 @@ public class BoardingVisualizerGui extends JFrame implements Gui {
             }
 
             if (cell.isOccupied()) {
-                colorCells.add(new ColorCell(pos.getRow(), pos.getSeat(), COLOR_OCCUPIED, cell.getPassenger().getSeat().toString()));
+                if (cell.getPassenger().isStoringBaggage()) {
+                    colorCells.add(new ColorCell(pos.getRow(), pos.getSeat(), COLOR_BAGGAGE,
+                        cell.getPassenger().getSeat().toString()));
+                } else {
+                    colorCells.add(new ColorCell(pos.getRow(), pos.getSeat(), COLOR_OCCUPIED,
+                        cell.getPassenger().getSeat().toString()));
+                }
             } else {
 
                 if (cell.isAisleCell()) {

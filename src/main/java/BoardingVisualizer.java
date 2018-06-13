@@ -19,7 +19,7 @@ class BoardingVisualizer {
             aircraftCrowd.step();
             gui.show(aircraftCrowd);
             try {
-                Thread.sleep(500);
+                Thread.sleep(200);
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
             }

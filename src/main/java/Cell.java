@@ -71,6 +71,11 @@ public class Cell {
         if (potentialSeatOwner == null || !hasPathTo(potentialSeatOwner.getSeat()))
             return;
 
+        if (!isAisleCell() && predecessor.isAisleCell() && !potentialSeatOwner.hasStoredBaggage()) {
+            potentialSeatOwner.storeBaggage();
+            return;
+        }
+
         if (hasFinalPassenger()) {
             predecessor.setPassenger(getPassenger());
             setPassenger(potentialSeatOwner);
@@ -80,6 +85,7 @@ public class Cell {
             setPassenger(potentialSeatOwner);
             predecessor.removePassenger();
         }
+
     }
 
 }
