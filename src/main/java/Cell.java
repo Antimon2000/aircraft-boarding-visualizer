@@ -49,6 +49,10 @@ public class Cell {
         return false;
     }
 
+    public boolean hasFinalPassenger() {
+        return (getPassenger() != null) && getPosition().equals(getPassenger().getSeat());
+    }
+
     public boolean isOccupied() {
         return getPassenger() != null;
     }
@@ -63,15 +67,17 @@ public class Cell {
             neighbor.step(this);
         }
 
-        Passenger passenger = predecessor.getPassenger();
-        if (passenger == null)
+        Passenger potentialSeatOwner = predecessor.getPassenger();
+        if (potentialSeatOwner == null || !hasPathTo(potentialSeatOwner.getSeat()))
             return;
 
-        if (isOccupied() && hasPathTo(passenger.getSeat())) {
+        if (hasFinalPassenger()) {
             predecessor.setPassenger(getPassenger());
-            setPassenger(passenger);
-        } else if (hasPathTo(passenger.getSeat())) {
-            setPassenger(passenger);
+            setPassenger(potentialSeatOwner);
+        }
+
+        if (!isOccupied()) {
+            setPassenger(potentialSeatOwner);
             predecessor.removePassenger();
         }
     }
